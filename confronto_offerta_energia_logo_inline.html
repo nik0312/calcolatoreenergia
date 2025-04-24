@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Confronto Offerta Energia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Importazione del font moderno (Google Fonts) */
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+    /* Stile base della pagina */
+    body {
+      font-family: 'Roboto', sans-serif;
+      padding: 30px 20px 20px 20px;
+      margin: 0;
+      background: linear-gradient(45deg, #FFCD00, #FF7F00);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Stile del titolo principale */
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 32px;
+      font-weight: 700;
+      color: #fff;
+      text-transform: uppercase;
+      max-width: 90%;
+    }
+
+    /* Contenitore principale delle tabelle */
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    /* Stile delle tabelle */
+    table {
+      border-collapse: collapse;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 480px;
+      margin: 20px;
+    }
+
+    /* Stile dell'intestazione delle tabelle */
+    th {
+      background-color: #E60000;
+      color: white;
+      text-align: center;
+      padding: 16px 20px;
+      border-radius: 12px 12px 0 0;
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    /* Stile delle celle delle tabelle */
+    td {
+      padding: 14px 20px;
+      border-bottom: 1px solid #eee;
+      font-size: 16px;
+      color: #555;
+    }
+
+    /* Stile degli input e dei select */
+    input, select {
+      width: 80%;
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      font-size: 13px;
+      background-color: #f9f9f9;
+      transition: background-color 0.3s ease;
+      height: 32px;
+      box-sizing: border-box;
+    }
+
+    /* Stile degli input e select quando sono in focus */
+    input:focus, select:focus {
+      background-color: #fff;
+      border-color: #E60000;
+      outline: none;
+    }
+
+    /* Stile del pulsante di calcolo */
+    button {
+      display: block;
+      margin: 40px auto 0;
+      padding: 15px 30px;
+      font-size: 18px;
+      background-color: #E60000;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    /* Stile del pulsante al passaggio del mouse */
+    button:hover {
+      background-color: #c10000;
+      transform: translateY(-4px);
+    }
+
+    /* Stile dei risultati */
+    .result {
+      font-weight: 500;
+      text-align: center;
+      margin-top: 20px;
+      font-size: 20px;
+      color: #333;
+    }
+
+    /* Stile del footer */
+    footer {
+      margin-top: auto;
+      padding: 20px;
+      text-align: center;
+      color: white;
+      font-size: 14px;
+      width: 100%;
+    }
+
+    /* Stili per schermi medi (max-width: 768px) */
+    @media (max-width: 768px) {
+      body {
+        padding: 20px 15px 15px 15px;
+      }
+
+      h1 {
+        font-size: 24px;
+        margin-bottom: 30px;
+      }
+
+      .container {
+        gap: 20px;
+      }
+
+      table {
+        margin: 10px;
+      }
+
+      th {
+        padding: 12px 15px;
+        font-size: 16px;
+      }
+
+      td {
+        padding: 10px 15px;
+        font-size: 14px;
+      }
+
+      input, select {
+        width: 90%;
+        padding: 5px 8px;
+        font-size: 12px;
+      }
+
+      button {
+        padding: 12px 24px;
+        font-size: 16px;
+        margin: 30px auto 0;
+      }
+
+      .result {
+        font-size: 18px;
+        margin-top: 15px;
+      }
+
+      footer {
+        padding: 15px;
+        font-size: 12px;
+        margin-bottom: 50px;
+      }
+    }
+
+    /* Stili per schermi piccoli (max-width: 480px) */
+    @media (max-width: 480px) {
+      body {
+        padding: 15px 10px 10px 10px;
+      }
+
+      h1 {
+        font-size: 20px;
+        margin-bottom: 20px;
+      }
+
+      .container {
+        gap: 15px;
+      }
+
+      table {
+        margin: 5px;
+      }
+
+      th {
+        padding: 10px 12px;
+        font-size: 14px;
+      }
+
+      td {
+        padding: 8px 12px;
+        font-size: 12px;
+      }
+
+      input, select {
+        width: 95%;
+        padding: 4px 6px;
+        font-size: 11px;
+      }
+
+      button {
+        padding: 10px 20px;
+        font-size: 14px;
+        margin: 20px auto 0;
+      }
+
+      .result {
+        font-size: 16px;
+        margin-top: 10px;
+      }
+
+      footer {
+        padding: 10px;
+        font-size: 11px;
+        margin-bottom: 60px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header con logo DG Group -->
+<header style="position: absolute; top: 0; left: 0; padding: 10px;">
+  <img src="data:image/jpeg;base64,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" alt="Logo DG Group" style="height: 50px; margin-right: 15px;">
+</header>
+
+  <h1>IL FUTURO DELL'ENERGIA, SCEGLI LA NOSTRA ENERGIA!</h1>
+
+  <div class="container">
+    <!-- Tabella Sinistra: Dati della bolletta attuale -->
+    <table>
+      <tr><th colspan="2">Bolletta Attuale</th></tr>
+      <!-- Input per i kWh consumati -->
+      <tr><td style="width:50%">kWh consumati:</td><td style="width:50%"><input type="number" id="x" inputmode="decimal" pattern="[0-9]*" onwheel="this.blur()"></td></tr>
+      <!-- Select per i mesi in bolletta -->
+      <tr><td>Mesi in bolletta:</td>
+        <td>
+          <select id="y">
+            <option value="1">1</option>
+            <option value="2">2</option>
+          </select>
+        </td>
+      </tr>
+      <!-- Input per i kWh annui -->
+      <tr><td style="width:50%">kWh annui:</td><td style="width:50%"><input type="number" id="z" value="0" inputmode="decimal" pattern="[0-9]*" onwheel="this.blur()"></td></tr>
+      <!-- Input per il prezzo della materia energia -->
+      <tr><td style="width:50%">Prezzo materia energia:</td><td style="width:50%"><input type="number" step="0.01" id="p" inputmode="decimal" pattern="[0-9]*" onwheel="this.blur()"></td></tr>
+      <!-- Select per il tipo di utenza -->
+      <tr><td>Tipo utenza:</td>
+        <td>
+          <select id="u">
+            <option value="residenziale">Residente</option>
+            <option value="altri">Non residente</option>
+          </select>
+        </td>
+      </tr>
+      <!-- Select per la potenza attuale -->
+      <tr><td>Potenza attuale:</td>
+        <td>
+          <select id="pot">
+            <option value="3">3 kW</option>
+            <option value="4.5">4.5 kW</option>
+            <option value="6">6 kW</option>
+          </select>
+        </td>
+      </tr>
+      <!-- Input per i costi aggiuntivi attuali -->
+      <tr><td>Costi aggiuntivi attuali (€/mese):</td><td><input type="number" step="0.01" id="costi_aggiuntivi" value="0" inputmode="decimal" pattern="[0-9]*" onwheel="this.blur()"></td></tr>
+      <!-- Campo per mostrare la spesa attuale -->
+      <tr><td>Spesa attuale (s.attuale):</td><td id="sattuale">--</td></tr>
+    </table>
+
+    <!-- Tabella Destra: Dati dell'offerta -->
+    <table>
+      <tr><th colspan="2">La Nostra Offerta</th></tr>
+      <!-- Select per il tipo di offerta -->
+      <tr><td>Offerta:</td>
+        <td>
+          <select id="of">
+            <option value="0.15">Flex (0,15 €/kWh)</option>
+            <option value="0.193">Fix (0,193 €/kWh)</option>
+          </select>
+        </td>
+      </tr>
+      <!-- Campo per mostrare il prezzo al kWh -->
+      <tr><td>Prezzo al kWh:</td><td id="prezzo_kwh">--</td></tr>
+      <!-- Campo per mostrare la spesa offerta stimata -->
+      <tr><td>Spesa offerta stimata (os):</td><td id="os">--</td></tr>
+    </table>
+  </div>
+
+  <!-- Risultati del calcolo -->
+  <div class="result" id="rqb_materia">Risparmio materia energia: --</div>
+  <div class="result" id="rqb_totale">Risparmio totale: --</div>
+
+  <!-- Pulsante per avviare il calcolo -->
+  <button onclick="calcola()">Calcola</button>
+
+  <!-- Pulsante Configura Ora (inizialmente nascosto) -->
+  <button id="configuraButton" onclick="window.location.href='https://agenti.fastwebenergia.it/login'" style="display: none; margin-top: 20px; background-color: #4CAF50;">Configura Ora</button>
+
+  <!-- Pulsante Stampa Preventivo (inizialmente nascosto) -->
+  <button id="stampaButton" onclick="stampaPreventivo()" style="display: none; margin-top: 20px; background-color: #2196F3; margin-left: 10px;">Stampa Preventivo</button>
+
+  <!-- Footer con copyright -->
+  <footer>
+    &copy; <span id="current-year"></span> Nicolò Baruchelli. Tutti i diritti riservati.
+  </footer>
+
+  <script>
+    // Aggiorna automaticamente l'anno del copyright
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Funzione principale per il calcolo del risparmio
+    function calcola() {
+      // Recupera i valori inseriti dall'utente
+      const x = parseFloat(document.getElementById('x').value); // kWh consumati
+      const y = parseInt(document.getElementById('y').value);   // Mesi in bolletta
+      const z = parseFloat(document.getElementById('z').value); // kWh annui
+      const p = parseFloat(document.getElementById('p').value); // Prezzo materia energia
+      const of = parseFloat(document.getElementById('of').value); // Prezzo offerta Fastweb
+      const pot = parseFloat(document.getElementById('pot').value); // Potenza attuale
+      const u = document.getElementById('u').value; // Tipo utenza
+      const costi_aggiuntivi = parseFloat(document.getElementById('costi_aggiuntivi').value) || 0; // Costi aggiuntivi attuali
+
+      // Verifica che tutti i valori necessari siano stati inseriti
+      if (isNaN(x) || isNaN(y) || isNaN(z) || isNaN(p)) {
+        alert("Inserisci tutti i valori correttamente.");
+        return;
+      }
+
+      // Calcola il prezzo attuale per kWh
+      const s_attuale = p / x;
+      document.getElementById('sattuale').innerText = s_attuale.toFixed(3) + " €";
+
+      // Calcolo della materia energia con Fastweb
+      const prezzo_kWh = of;
+      const os_materia = ((x * 1.10) * of) + (3 * y); // Include i 3€ mensili base
+      document.getElementById('prezzo_kwh').innerText = prezzo_kWh.toFixed(3) + " €";
+      
+      // Calcolo dei costi aggiuntivi attuali
+      const costi_attuali_aggiuntivi = costi_aggiuntivi * y;
+      
+      // Calcolo delle differenze di costi in base a potenza e tipo utenza
+      let differenza_costi = 0;
+      let costi_potenza = 0;
+      let costi_utenza = 0;
+      
+      // Calcola costi aggiuntivi per potenza
+      if (pot === 4.5) {
+        costi_potenza = 5 * y; // 5€ al mese per potenza 4.5kW
+      } else if (pot === 6) {
+        costi_potenza = 10 * y; // 10€ al mese per potenza 6kW
+      }
+      
+      // Calcola costi aggiuntivi per tipo utenza
+      if (u === "altri") {
+        costi_utenza = 12 * y; // 12€ al mese per utenza non residenziale
+      }
+      
+      // Somma i costi aggiuntivi e sottrai i costi attuali
+      differenza_costi = (costi_potenza + costi_utenza) - costi_attuali_aggiuntivi;
+      
+      // Mostra la spesa totale stimata
+      const os = os_materia;
+      document.getElementById('os').innerText = os.toFixed(2) + " €";
+
+      // Calcolo e visualizzazione del risparmio sulla materia energia
+      const rqb_materia = (p - os_materia).toFixed(2);
+      const testoRisparmioMateria = parseFloat(rqb_materia) < 0 ? "Aumento materia energia" : "Risparmio materia energia";
+      document.getElementById('rqb_materia').innerText = testoRisparmioMateria + ": " + Math.abs(rqb_materia) + " €";
+
+      // Calcolo e visualizzazione del risparmio totale
+      const rqb_totale = (p - os_materia - differenza_costi).toFixed(2);
+      const testoRisparmioTotale = parseFloat(rqb_totale) < 0 ? "Aumento totale" : "Risparmio totale";
+      document.getElementById('rqb_totale').innerText = testoRisparmioTotale + ": " + Math.abs(rqb_totale) + " €";
+
+      // Mostra il pulsante Configura Ora
+      document.getElementById('configuraButton').style.display = 'block';
+    }
+
+    // Funzione per stampare il preventivo
+    function stampaPreventivo() {
+      // Crea una nuova finestra per la stampa
+      const printWindow = window.open('', '_blank');
+      
+      // Ottieni i valori dal form
+      const kWhConsumati = document.getElementById('x').value;
+      const mesiBolletta = document.getElementById('y').value;
+      const kWhAnnui = document.getElementById('z').value;
+      const prezzoMateria = document.getElementById('p').value;
+      const tipoUtenza = document.getElementById('u').options[document.getElementById('u').selectedIndex].text;
+      const potenza = document.getElementById('pot').options[document.getElementById('pot').selectedIndex].text;
+      const offerta = document.getElementById('of').options[document.getElementById('of').selectedIndex].text;
+      const spesaAttuale = document.getElementById('sattuale').innerText;
+      const spesaOfferta = document.getElementById('os').innerText;
+      const risparmioMateria = document.getElementById('rqb_materia').innerText;
+      const risparmioTotale = document.getElementById('rqb_totale').innerText;
+
+      // Crea il contenuto HTML per la stampa
+      const printContent = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>Preventivo Fastweb Energia</title>
+          <style>
+            body {
+              font-family: Arial, sans-serif;
+              padding: 20px;
+              max-width: 800px;
+              margin: 0 auto;
+            }
+            .header {
+              text-align: center;
+              margin-bottom: 30px;
+            }
+            .logo {
+              max-width: 200px;
+              margin-bottom: 20px;
+            }
+            .section {
+              margin-bottom: 20px;
+            }
+            .section-title {
+              font-weight: bold;
+              margin-bottom: 10px;
+              color: #E60000;
+            }
+            .data-row {
+              display: flex;
+              justify-content: space-between;
+              margin-bottom: 5px;
+            }
+            .footer {
+              margin-top: 30px;
+              text-align: center;
+              font-size: 12px;
+              color: #666;
+            }
+            @media print {
+              body {
+                padding: 0;
+              }
+              .no-print {
+                display: none;
+              }
+            }
+          </style>
+        </head>
+        <body>
+          <div class="header">
+            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxAPEhEQEBQVEBAVEBEQERUVGBcQFhAVFhYXGBUXGBkaHDQgGBomGxgWITEiJSkrLi46FyAzPjMtOigtLisBCgoKDg0OGhAQGy4fHyUtLS0tLS0rLS0tLS0tKy0tLS0tLS0tLS0tLS0tLS0tLS0tLSstLS0tLSstLS0tKy0tLf/AABEIAMgAyAMBIgACEQEDEQH/xAAcAAEAAgMBAQEAAAAAAAAAAAAAAQcCBQYECAP/xABJEAABAwIDAwYJBwoFBQAAAAABAAIDBBEGEiEFMWEHEzJBUXEUcnOBkZKhsbIjMzRSU8HRFhciQmKCk6Kz0hU1dKPhJDZDg/D/xAAbAQEAAgMBAQAAAAAAAAAAAAAAAwQBAgYFB//EADgRAAICAQIDBAgEBAcAAAAAAAABAgMRBBIFITETQVFhFCJxgZGhwdEGIzLhUlOx8BUzNWJyktL/2gAMAwEAAhEDEQA/ALwQoqn5QMbueXUtI60Qu2SRp1lPW1p6m8evu36TmoLLLWk0lmps2Q977kjo8S8oNNSExxf9RMNDY2Yw8XdZ4Ds6lXm1cc19QT8qYm/Vi+TA/e6XtXOEoqM7pS8jsNNwrTUL9O5+L+3RH6zVUj9Xvc4/tOLvevxzFStnsbD9VWk+Dxl4BsXaNaP3jp5lGk35l2c4VxzJpL5GrzFMxXX/AJuNpfZx+u1PzcbS+zj9dq37KfgQen6b+ZH4o5HMVGYrp6vAW0Iml5hzAXJyOa8+qDc+ZcyW20Oh3H71q4uPVYJqr6rVmuSl7CMxTMURakozFMxREAzFMxREAzFMxREAzFMxREB+0NVIzVj3MP7Li33LfbLxzX09rSmVv1ZflAf3ul7VziLaMpLoyG3T1WrFkU/ai5sNcoFPVkRzf9PKdBc3Y88HdR4G2/rXahfMg7VYfJ/jZ0bm0tU68Rs2J7tTGeprj1t49XdutVX55SOc4jwbYnZR0719vsWyiIrRzpxPKXiA0sAhjNpprtuN7GDpHgTu857FTJK6PlB2kamtmIN2xnmRwDDY/wA2Zc4vPum5SO54VpVRpo+Mub9/T4IhEUqE9IMFyB2usvo3Y+z2UsMcMYs1jQO89ZPEnXzr50p+k3x2/cvphqt6VdX/AH3nNfiKTxWu7n9DJERWzmQqY5V9mshqmyMAbzrOccB9dpsT59PQrmVUcsnz1N5J/wASgvXqM9bgsmtXFLvT/oV2oRFQO1CIiAIiIAiIgCIiAIiIApChFkFz8mmIDVQGGQ3mhs251L2HoniRu8w7UVd8n+0TTVsNzZrzzLuIebD+bKiv0zconFcU0Tq1D2Lk+fsz+5oKqXO97zvc9zvWN1goUqgdqlhYIREWAZw9Jvjj7l9MBfMo07ldWEMZwVMTGTSNjqGtDXh5Dc5GmZpO+/YrWmkllM578QUTnGE4rKWc+WcfI7JF5fDoftI/Xb+KeHw/aM9dv4q5lHL7ZeD+B6VVHLL89T+Rf8SsSs23SwtL5Jo2tH7QJPcN58ypbG2IP8QqS9oIia3m4wd5aDfMe8n3KvqJLZg9jglE3qVZjkk+fuwc+ilQqJ2IREQBERAERSgIREQBERAEREB+lLLkex43te13qm6LBQs5ZpKEJPMkERFg3CIiAKVCLIJv3pc8URYAuoRSgP2pKOSZ2WNped+nV3nqC2P5M1X1B6zfxXR4PhDacOA1c5xJ7tB5vxW8VadzTwjwtVxSyFrhBLCOA/Jmr+qPWH4p+TNX9UesPxXfotO3kQf4vf4L5/crCsoZITlkaWHqvuPcV52hd9i2AOpnuI1a5jmnsu4D715uSzZjJ6p0kgzCFmdoP1ybA8ba+eytUN2HpV8QT0sr5Lmvma2jwPtCVoe2AgHUZy1h9VxuF6PzebT+xb/Ej/uV42Reh6NA8J8f1Of0x+D+5R35vNp/ZN/iR/3LTbY2FVUZAqI3MvoDo5p7nC4uvopeDbOzY6qGSCQXa5pHinqI4g6rD0yxyN6uP3b12kU15Z+7PnJFLxY27HW9ChUjrAiIgCIiAIiIAiIgCIiAIiIApUKUB32EvozPGf8AEVuFp8JfRmeM/wCIrcKhZ+pnHav/AD5+1hERaFc1WKfo0n7n9Rqz5GvnajyLPiWGKfo0n7n9Rqz5GvnajyLPiXoaHqvaelH/AEy32/8AkthERewc2FDtylQ7cgPmafpu8dywWc/Td47lgvKPpa6BERYAREQBERAEREBKIvdsrYtTVkiCJ0tt5GgHe46ArKWTWU4wW6TwvPoeFF0/5v8Aan2H+5F/en5v9qfYf7kX9622S8CD0zT/AMyP/ZHMIt9WYN2hC0vfA7KN+UtkPoaSVoVhxa6ktd1dvOuSl7OZ12EdqxhnMPIa4OJbfQOB6u9dLzze0elVYl1WlQpPOTztRwqNtjmpYyWnzze0elOeb2j0qrLnilzxWPR/P5fuQ/4Kv4/l+52OLNqx82YWEOc4jNbUNAIPp0WuwPt8UNSJH3MT283JbWwvcOHcR7SufJRT1Ls+hfr0NcaHQ+afU+jaPatPM0PilY9p6w4e3sXo8Ij+s30hUTRYN2jM0PZA7Kd2YtYfQ4gr0fkFtT7A/wASL+9XldP+E56XCdKnj0hL4fcu7whn12+sFzGLsYQ0sT2xvbJUFpaxrSHZSf1nW3Ae1Vx+QO1PsD/Ei/vWm2rsappCG1ET2X3E6g9zhoSsSunj9OCXT8I0rsX5yn5LHP5s8J61CIqZ1AREQBERAEREAREQEsF9OIHpX0VsLZcdJBHBGLBrRc/Wd1uPElfO8HTb47fuX0wFb0q6v2HNfiKTSrj3c/jyMkRFbOZCpXlT2UyCqbJGA0TMzuA3ZwbOPn0891dSqfll+epvJP8AiUF69RnrcEk1q0l3pldIiKgdqEREBK7Lkt2Uyoqi+QBwhZzjQd2ckBp17NT32XGqxORr56p8iz4lLSvXRQ4pJx0lji+768y2ERF6JwZC1229mR1cMkMguHNNj9U9ThxBWxUOTGTKk4tNcmj5leLEjsdb0Isp+m7x3LBeSfSUEREMhERAEREAREQGcHSb47fuX0wF8yjRXjhDFkNZEwOe1lQGgPYTlLiP1m33g+xWtM1lpnO/iCqcowmllLKflnB1aLDOO0elM47R6VcOWMlVHLJ89TeSf8QVmVtdDA0vle2No3lxACpHHW3m19SXMvzTG83HfQuANy63Vcn0AblBqJJQwezwOmctSp45LOTnERFQOyCIiAlWJyNfO1HkWfEq7XRYF2+KGoDn35p7ebktqWgm4dbrsR6L71JU0ppspcRqlbppxjzePqmXyi8lFtCGdofFI17T1tIIXpzDtHpXpHBNNcmZKCozjtHpXL4vxbDRxPDXtfUFpEbAcxaT+s624D2rDaiss2qqnbNQgstlIT9J3juWCkqF5R9ISCIiAIiIAiIgCIiAKbqEQGVzxS54rFEBN+9QiIAilQgCIiAIiIDK/elzxWKIDK54qLqFKyCERFgBFKhAEREBKItthBoNbSg6jn4viFllLLwaWz2QlN88Jv4I1wpJPqP9UrF9O9ou5rwO0ghXVjbFztnOha2NsvONeTd2W2XLw4rx4Sxr/iUrqeSBrRzTn3vnBsQLEEcVY7GO7bu5njrimodPb9ktv/Lzx4FPLOOB7tWtc4cASuy2hsKAbYbSgWgdKxxYNBYsDy3uvf0rscW4rGyTFFFC1zSwutfmw0A2AADVoquuX0J7OJPdXGqG5yW7rjCxkpySBzekxze8ELBXRhPErdrieKaBgDAzQkSB4dmvoR1W9qqXENM2GpqImdBs8jW9dgHGwWJ17Umnlewk0mtlbbOmyG2UfPP08zwLJkZdoGknhqg3jvV1Vc8WxqCOSGFrz8mDqGl7nDVznW1O9K4bs5fQ21msencIxjulJ4S6f31KXdTPFiWuA7SCsFbWG+UE1tQymdA1okzDNnzWs0nUW4WXK8pGzYYK1oiaGNfFHI5rRYZszmmw6twWZVrbui8kdOum71TbXsbWeuVy93kcm2meRcMeR1EAo+ne0XLXgdpBAV5YxxAdmwskYxrw6QR2JygDK49Q/ZWowrjg7Qm8GfC1gLHOuHZt1tCCOK2dMU9u7mVYcVvnU7o1eqv937FQLJkLndEOPbYXXX4p2JCzajKdjckUr4LtGgbzjg12Xs6/Su5xVt9mx44I4YGlr84AB5sNDMvYNeksKpc8voWLeJP8uNUNzmspZxgph9O8C5a4DtIIWFlb+FsdHaM3gz4WsDmONw7NutoQRxXObU2ZFTbap2RNDWOmgkyjc0lwvYdlxdYdSwnFmK+IT7SVdte1qO7rn3eRwcjC3Qgg9hFlLWkmwBJ6gFY/LKAHUviTe9q1XJML1v8A6JPe1Ydfr7SWGu3aP0nb3N49j8f2OMc0j9E6HrC/XwST6j/VK7/EEbTt2EWFjJTk8f0W/wD3mXUY2xe7ZzomtjbJzjXOuXZbZSOHFbKpc230IJcSm5Vxrr3SnHPXHu6FLSQOb0mFveCFgrowniVu1xPFNA0NY1lwTzjXh2beCOHtVT4ipGwVVREzRjJ3taOwX0C1nWklJPKJ9JrZW2ypshsklnrn7GuREUR6B+tVFke9h3te5vqmy2mDfptJ5aL4l6uUHZxpq6bT9F7uebxD9T/NmXkwfpW0l/toviW+MTx5/Upyt7XSOa74P+h2PLN06XycvvatZyR/TXf6d/xMXUY72Ia+ppYGyNjIgmkJP6WgLRuvx9hX6YTwV/hkrqmSZrhzTmWy5ALkG5Jdw9qsuDdue48JaymPDexb9Zrp7zU7S/7gj8aL+kF+3KDRx1FfQwynLG9uVxuBpnPWR22Wjr9vQHbAqg68DZmNzjUWDQwu7r39C7LFmFG7VMM0c7WNDCAQA9rwTe4IciWYyS58zM5djbRKx7F2eM46PDRppMBU7qkRU87428xzr8pDzfMAOjaw3+hcBiDZ/gtRLBmz5H5cxFi7QFWzhPCzdlGaaSdrmuYASRzbWAG9ySVVeKq1lRV1EsZux0pyntAsL92i0uilFPGHkucN1E7L5QU3OCXVrHPPxNY37wrg5Sv8tj8eH4HKnh1d6uyspo9s0MbIZQz5sk2DixzRq1wvod6xRzUkjbislC2iyX6VLm/gc5V4Ko+bpTBM5s0kkTc2YP6YuSALa6LnsZYe8BmhaZXTZ2h13CxFnWtvK7DD3J26lniqHVDXiNxdlDMt9CN+bcuf5T9pxT1UTY3B/NNDXkG4Di+9r8LLayKUctYfIg0eonLVKuFjsjhttr5ePLkdpygQwPZStqXGOA1IzuGlvkpLd36VlnhjD+zoT4XRky/ovaHB2fxgB26LWcsBHgsH+oH9N65Hk7xN4HNzUh+QlIDuyN3U/wC4/wDCklNKzDRRo0ttmgcq5Pq8x7mvuRWbYFZtaCUNLB4VTsaHaGzZGjXjvXQ8tHRo++f3Rry46oIKOupqtrmgOmjmljHSBY4EvA7CPb36dNirYLNsxwSQzNDWZyCBzgcH5b7joRlWm1tSj35J3fVG7TXL1YKLXseGjhOSr6ezyMnuC3WKP88pfGpviW1wrgY7Pm8JfO14axwsG5d9tSSVy2I9uQP2rHOx2aKOSAFw1BDTdxHbvPoTa4wSl4kztjqdXOdPrLs2vfzNpy0dKk8Sb3xrVckv00+Qk97F22LsMjawgkimaAwPsbc414fl1BB4e1ebCOCTs6U1D5mvHNuZYNy2uQbkk8PatnXJ27u4r162hcOdLfrYaxz8TS7d/wA9g8rTfCFtcd7KjrKukhkk5lphnObTeCNNT3+hc9XbQjn21FJG4OjFRCwO6nEBoNvP7l6uWM/K01j/AOKT3hatrbJ9eZLCE3fp4J7X2fw5PuOgw/s6i2O2aV1S1weGglxaLBt7AAak6qp9u1oqKieZujXzPeL9hOl14rniihnZuSSWEetpdC6bJWzm5yffjB+lLFnexg3ue1vpNkW+5PtmmoroR+qw887gGaj+bKEW1dW5ZK2v4ktPbs8s/EsPlMw+aqATRi80N3WG97D0hxI0PmPaqa3L6bsqn5QMEOjc6qpW3iN3SRgaxnrc0dbeHV3bpb6s+sjzuC8RjD8ix8u5/T7Ffmd182Z1917m6Pne7QueR2EkrCyhVDqcIlZx1D26Nc5o4EhYKEGD9JKh7tHOe4cSSsFClAlgLKOZzTdpLT2g2WCLAayfu6skIsXyEHeC42X4ooWTCSXQzdKTYEkgaC5vb8FiihYMkucTv1/40WTJnN6JcO2xssEWQfo+oeRYueR2EkrBQpQYM2TPb0S4dxsj6h7hYucR2EkrBEGEAUe8uN3Ek9pN1CICUAugF1YXJ/gl0pbVVTcsYs6NjhrKRuc4dTeHX3b9oQc3hFbVaqvTVuc/cvE6Tkzw+aWAzSC001nWO9jP1Rwvv847EXahF6UY7VhHB33Svsdk+rJREWSE4nEnJ9T1RMkJ8HlOpsLseeLeo8R7VXm1cD19OTeIyN6jF8oD5ul7ERQWUwZ6ui4rqKsQzlefPHv6nPzU0jNHscw/tAt96/NEVF9Ts65OUU2ERFg3CIiAIiIAiIgCIiAIiIAiIgP2hppH6MY55/ZBd7lvtlYHr6i1ojG3rdL8mB5ul7ERT1VqXU8bifELdMvy8e8sPDXJ7T0pEkx8IlGouLMYeDes8T6Au1siK9GKjyRyd19l0t1jyyURFkhP/9k=" alt="Logo DG Group" class="logo">
+            <h1>Preventivo Fastweb Energia</h1>
+          </div>
+
+          <div class="section">
+            <div class="section-title">Dati Cliente</div>
+            <div class="data-row">
+              <span>Tipo Utenza:</span>
+              <span>${tipoUtenza}</span>
+            </div>
+            <div class="data-row">
+              <span>Potenza Contrattuale:</span>
+              <span>${potenza}</span>
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="section-title">Consumi</div>
+            <div class="data-row">
+              <span>kWh Consumati:</span>
+              <span>${kWhConsumati} kWh</span>
+            </div>
+            <div class="data-row">
+              <span>Mesi in Bolletta:</span>
+              <span>${mesiBolletta}</span>
+            </div>
+            <div class="data-row">
+              <span>kWh Annui:</span>
+              <span>${kWhAnnui} kWh</span>
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="section-title">Confronto Offerte</div>
+            <div class="data-row">
+              <span>Spesa Attuale:</span>
+              <span>${spesaAttuale}</span>
+            </div>
+            <div class="data-row">
+              <span>Offerta Selezionata:</span>
+              <span>${offerta}</span>
+            </div>
+            <div class="data-row">
+              <span>Spesa Offerta:</span>
+              <span>${spesaOfferta}</span>
+            </div>
+            <div class="data-row">
+              <span>${risparmioMateria}</span>
+            </div>
+            <div class="data-row">
+              <span>${risparmioTotale}</span>
+            </div>
+          </div>
+
+          <div class="footer">
+            <p>Preventivo generato il ${new Date().toLocaleDateString()}</p>
+            <p>Per procedere con l'attivazione, visita: https://agenti.fastwebenergia.it/login</p>
+          </div>
+        </body>
+        </html>
+      `;
+
+      // Scrivi il contenuto nella nuova finestra
+      printWindow.document.write(printContent);
+      printWindow.document.close();
+
+      // Attendi il caricamento delle immagini
+      printWindow.onload = function() {
+        // Stampa la finestra
+        printWindow.print();
+      };
+    }
+  </script>
+</body>
+</html>
