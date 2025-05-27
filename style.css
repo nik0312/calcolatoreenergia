@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  background: url('assets/sfondo.gif') no-repeat center center fixed;
+  background: url('sfondo.gif') no-repeat center center fixed;
   background-size: cover;
   font-family: 'Comic Sans MS', cursive, sans-serif;
   overflow: hidden;
